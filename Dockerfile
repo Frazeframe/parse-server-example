@@ -6,9 +6,10 @@ ADD . /parse
 WORKDIR /parse
 RUN npm install
 
-ENV APP_ID setYourAppId
-ENV MASTER_KEY setYourMasterKey
-ENV DATABASE_URI setMongoDBURI
+ENV APP_ID=‘JywFR4CxgCLRsb32sksRVA8aLuIuoAlRMqnoqlJV’
+ENV MASTER_KEY=‘rNSMQDmGw5eBMFBuP0OOb0KbEWBcv3CJ23YdfU8i’
+ENV MONGOLAB_URI=‘mongodb://frazeframetester:Frazeframe123@ds017018-a0.mlab.com:17018/fraze-frame'
+
 
 # Optional (default : 'parse/cloud/main.js')
 # ENV CLOUD_CODE_MAIN cloudCodePath
