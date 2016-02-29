@@ -20,12 +20,12 @@ var api = new ParseServer({
   push: {
       ios: [
 	      {
-	        pfx: process.env.DEV_PUSH_CERTIFICATE_PATH || '/certificates/FrazeFramePushDevelopment.pem',
-	        bundleId: 'appsByLukas.com.Fraze-Frame'
+	        cert: process.env.DEV_PUSH_CERTIFICATE_PATH || '/certificates/FrazeFramePushDevelopment.pem',
+	        bundleId: 'appsByLukas.com.Fraze-Frame',
 	        production: false
 	      }, 
 	      {
-	        pfx: process.env.PROD_PUSH_CERTIFICATE_PATH || '/certificates/FrazeFramePushDevelopment.pem',
+	        cert: process.env.PROD_PUSH_CERTIFICATE_PATH || '/certificates/FrazeFramePushDevelopment.pem',
 	        bundleId: 'appsByLukas.com.Fraze-Frame',  
 	        production: true 
 	      }
