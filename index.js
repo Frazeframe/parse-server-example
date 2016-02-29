@@ -18,21 +18,17 @@ var api = new ParseServer({
   serverURL: process.env.SERVER_URL || 'http://localhost:1337',  // Don't forget to change to https if needed
 
   push: {
-    android: {
-      senderId: '', // The Sender ID of GCM
-      apiKey: '' // The Server API Key of GCM
-    },
     ios: [
-      {{
-                cert: process.env.DEV_PUSH_CERTIFICATE_PATH || '/certificates/FrazeFramePushDevelopment.pem',
-                bundleId: 'appsByLukas.com.Fraze-Frame',
-                production: false
-              }, 
-              {
-                cert: process.env.PROD_PUSH_CERTIFICATE_PATH || '/certificates/FrazeFramePushDevelopment.pem',
-                bundleId: 'appsByLukas.com.Fraze-Frame',  
-                production: true 
-              }}
+      {
+        cert: process.env.DEV_PUSH_CERTIFICATE_PATH || '/certificates/FrazeFramePushDevelopment.pem',
+        bundleId: 'appsByLukas.com.Fraze-Frame',
+        production: false
+      }, 
+      {
+        cert: process.env.PROD_PUSH_CERTIFICATE_PATH || '/certificates/FrazeFramePushDevelopment.pem',
+        bundleId: 'appsByLukas.com.Fraze-Frame',  
+        production: true 
+      }
     ]
   }
 });
