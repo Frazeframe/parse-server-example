@@ -9,6 +9,8 @@ RUN npm install
 ENV APP_ID=‘JywFR4CxgCLRsb32sksRVA8aLuIuoAlRMqnoqlJV’
 ENV MASTER_KEY=‘rNSMQDmGw5eBMFBuP0OOb0KbEWBcv3CJ23YdfU8i’
 ENV MONGOLAB_URI=‘mongodb://frazeframetester:Frazeframe123@ds017018-a0.mlab.com:17018/fraze-frame'
+ENV DEV_PUSH_CERTIFICATE_PATH=‘/certificates/FrazeFramePushDevelopment.pem’
+ENV PROD_PUSH_CERTIFICATE_PATH=‘/certificates/FrazeFramePushDevelopment.pem’
 
 
 # Optional (default : 'parse/cloud/main.js')
