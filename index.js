@@ -18,16 +18,18 @@ var api = new ParseServer({
   serverURL: process.env.SERVER_URL || 'http://localhost:1337',  // Don't forget to change to https if needed
 
   push: {
-      ios: {
-        pfx: process.env.DEV_PUSH_CERTIFICATE_PATH || '/certificates/FrazeFramePushDevelopment.pem',
-        bundleId: 'appsByLukas.com.Fraze-Frame'
-        production: false
-      }, 
-      {
-        pfx: process.env.PROD_PUSH_CERTIFICATE_PATH || '/certificates/FrazeFramePushDevelopment.pem',
-        bundleId: 'appsByLukas.com.Fraze-Frame',  
-        production: true 
-      }
+      ios: [
+	      {
+	        pfx: process.env.DEV_PUSH_CERTIFICATE_PATH || '/certificates/FrazeFramePushDevelopment.pem',
+	        bundleId: 'appsByLukas.com.Fraze-Frame'
+	        production: false
+	      }, 
+	      {
+	        pfx: process.env.PROD_PUSH_CERTIFICATE_PATH || '/certificates/FrazeFramePushDevelopment.pem',
+	        bundleId: 'appsByLukas.com.Fraze-Frame',  
+	        production: true 
+	      }
+      ]
     }
 });
 // Client-keys like the javascript key or the .NET key are not necessary with parse-server
