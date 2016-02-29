@@ -15,22 +15,8 @@ var api = new ParseServer({
   cloud: process.env.CLOUD_CODE_MAIN || __dirname + '/cloud/main.js',
   appId: process.env.APP_ID || 'JywFR4CxgCLRsb32sksRVA8aLuIuoAlRMqnoqlJV',
   masterKey: process.env.MASTER_KEY || 'rNSMQDmGw5eBMFBuP0OOb0KbEWBcv3CJ23YdfU8i', //Add your master key here. Keep it secret!
-  serverURL: process.env.SERVER_URL || 'http://localhost:1337',  // Don't forget to change to https if needed
+  serverURL: process.env.SERVER_URL || 'http://localhost:1337' // Don't forget to change to https if needed
 
-  push: {
-      ios: [
-	      {
-	        cert: process.env.DEV_PUSH_CERTIFICATE_PATH || '/certificates/FrazeFramePushDevelopment.pem',
-	        bundleId: 'appsByLukas.com.Fraze-Frame',
-	        production: false
-	      }, 
-	      {
-	        cert: process.env.PROD_PUSH_CERTIFICATE_PATH || '/certificates/FrazeFramePushDevelopment.pem',
-	        bundleId: 'appsByLukas.com.Fraze-Frame',  
-	        production: true 
-	      }
-      ]
-    }
 });
 // Client-keys like the javascript key or the .NET key are not necessary with parse-server
 // If you wish you require them, you can set them as options in the initialization above:
