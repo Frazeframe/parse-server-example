@@ -27,6 +27,11 @@ var api = new ParseServer({
         pfx: process.env.DEV_PUSH_CERTIFICATE_PATH || 'FFDevPushCert.p12',
         bundleId: 'appsByLukas.com.Fraze-Frame',
         production: false
+      }, 
+      {
+        pfx: process.env.PROD_PUSH_CERTIFICATE_PATH || 'FFProdPushCert.p12',
+        bundleId: 'appsByLukas.com.Fraze-Frame',  
+        production: true 
       }
     ]
   }
