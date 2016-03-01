@@ -24,18 +24,19 @@ var api = new ParseServer({
     },
     ios: [
       {
-        pfx: process.env.DEV_PUSH_CERTIFICATE_PATH || 'FFDevPushCert.p12',
+        pfx: process.env.DEV_PUSH_CERTIFICATE_PATH || '~/.FFDevPushCert.p12',
         bundleId: 'appsByLukas.com.Fraze-Frame',
         production: false
       }, 
       {
-        pfx: process.env.PROD_PUSH_CERTIFICATE_PATH || 'FFDevPushCert.p12',
+        pfx: process.env.PROD_PUSH_CERTIFICATE_PATH || '~/.FFDevPushCert.p12',
         bundleId: 'appsByLukas.com.Fraze-Frame',  
         production: true 
       }
     ]
   }
 });
+
 // Client-keys like the javascript key or the .NET key are not necessary with parse-server
 // If you wish you require them, you can set them as options in the initialization above:
 // javascriptKey, restAPIKey, dotNetKey, clientKey
