@@ -24,12 +24,12 @@ var api = new ParseServer({
     },
     ios: [
       {
-        pfx: process.env.DEV_PUSH_CERTIFICATE_PATH || './certificates/ParsePushDevCertificate.p12',
+        pfx: process.env.DEV_PUSH_CERTIFICATE_PATH || 'FFDevPushCert.p12',
         bundleId: 'appsByLukas.com.Fraze-Frame',
         production: false
       }, 
       {
-        pfx: process.env.PROD_PUSH_CERTIFICATE_PATH || './certificates/ParsePushDevCertificate.p12',
+        pfx: process.env.PROD_PUSH_CERTIFICATE_PATH || 'FFDevPushCert.p12',
         bundleId: 'appsByLukas.com.Fraze-Frame',  
         production: true 
       }
