@@ -16,7 +16,7 @@ var api = new ParseServer({
   appId: process.env.APP_ID || 'JywFR4CxgCLRsb32sksRVA8aLuIuoAlRMqnoqlJV',
   masterKey: process.env.MASTER_KEY || 'rNSMQDmGw5eBMFBuP0OOb0KbEWBcv3CJ23YdfU8i', //Add your master key here. Keep it secret!
   serverURL: process.env.SERVER_URL || 'http://localhost:1337',  // Don't forget to change to https if needed
-  fileKey: process.env.FILE_KEY || 'efac82cf-dd00-43bf-9262-f14d7a7cafdb',
+  fileKey: 'efac82cf-dd00-43bf-9262-f14d7a7cafdb',
 
   push: {
     android: {
