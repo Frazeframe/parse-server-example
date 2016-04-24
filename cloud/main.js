@@ -13,12 +13,7 @@ Parse.Cloud.define('voteOnPhoto', function(request, response) {
       response.success(result);
     },
     error: function() {
-    	if (error.code === Parse.Error.OBJECT_NOT_FOUND) {
-	      response.error("Vote object not found...");
-	    }
-	    else {
-	    	response.error("Parse server error looking up vote.");
-	    }
+      response.error("Vote lookup failed");
     }
   });
 });
