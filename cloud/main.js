@@ -5,15 +5,20 @@ Parse.Cloud.define('hello', function(req, res) {
 
 Parse.Cloud.define('voteOnPhoto', function(request, response) {
 	var query = new Parse.Query("Vote");
-  query.equalTo("createdBy", request.params.user);
+  query.equalTo("createdBy", request.params.createdBy);
   query.equalTo("photo", request.params.photo);
 
-  query.find({
-    success: function(results) {
+  query.first({
+    success: function(result) {
       response.success(results);
     },
     error: function() {
-      response.error("Vote lookup failed");
+    	if (error.code === Parse.Error.OBJECT_NOT_FOUND) {
+	      response.error("Vote object not found...");
+	    }
+	    else {
+	    	response.error("Parse server error looking up vote.");
+	    }
     }
   });
 });
