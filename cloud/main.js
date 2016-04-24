@@ -10,7 +10,7 @@ Parse.Cloud.define('voteOnPhoto', function(request, response) {
 
   query.find({
     success: function(results) {
-    	if results[0] != null {
+    	if (results[0] != null) {
     		response.success(results[0]);
     	}
     	else {
