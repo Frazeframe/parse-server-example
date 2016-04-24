@@ -18,7 +18,7 @@ Parse.Cloud.define('voteOnPhoto', function(request, response) {
     	}
     },
     error: function() {
-      response.error("Vote lookup failed");
+      response.error("Vote lookup");
     }
   });
 });
