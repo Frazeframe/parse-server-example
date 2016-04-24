@@ -10,7 +10,12 @@ Parse.Cloud.define('voteOnPhoto', function(request, response) {
 
   query.find({
     success: function(results) {
-      response.success(results);
+    	if results[0] != nil {
+    		response.success(results[0]);
+    	}
+    	else {
+    		response.success("Yay!");
+    	}
     },
     error: function() {
       response.error("Vote lookup failed");
