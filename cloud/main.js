@@ -8,9 +8,9 @@ Parse.Cloud.define('voteOnPhoto', function(request, response) {
   query.equalTo("createdBy", request.params.createdBy);
   query.equalTo("photo", request.params.photo);
 
-  query.first({
-    success: function(result) {
-      response.success(result);
+  query.find({
+    success: function(results) {
+      response.success(results);
     },
     error: function() {
       response.error("Vote lookup failed");
