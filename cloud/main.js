@@ -10,7 +10,7 @@ Parse.Cloud.define('voteOnPhoto', function(request, response) {
 
   query.first({
     success: function(result) {
-      response.success(results);
+      response.success(result);
     },
     error: function() {
     	if (error.code === Parse.Error.OBJECT_NOT_FOUND) {
