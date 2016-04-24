@@ -18,7 +18,12 @@ Parse.Cloud.define('voteOnPhoto', function(request, response) {
     	}
     },
     error: function() {
-      response.error("Vote lookup");
+    	if (error.code == 141) {
+    		response.success("Yay!");
+    	}
+    	else {
+    		response.error("An error occured when making the vote.");
+    	}
     }
   });
 });
