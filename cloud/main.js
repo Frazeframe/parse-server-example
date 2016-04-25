@@ -1,23 +1,29 @@
 Parse.Cloud.afterSave('Vote', function(request) {
-	Parse.cloud.useMasterkey();
 
-	var pushQuery = new Parse.Query(Parse.Installation);
-  pushQuery.equalTo("username", "berlinluke");
+	var voteWeight = request.object.get("weight");
+	var user = request.object.get("createdBy");
+	var userId = user.id;
 
-	Parse.Push.send({
-	  where: pushQuery,
-	  data: {
-	    alert: 'Test',
-	    badge: 1,
-	    sound: 'default'
-	  }
-	}, {
-	  useMasterKey: true,
-	  success: function() {
-	    // Push sent!
-	  },
-	  error: function(error) {
-	    // There was a problem :(
-	  }
-	});
+	if (voteWeight == 1) {
+		var UserClass = Parse.Object.extend("User");
+		var pushQuery = new Parse.Query(UserClass);
+	  pushQuery.equalTo("objectId", userId);
+
+		Parse.Push.send({
+		  where: pushQuery,
+		  data: {
+		    alert: 'You got a prop on your photo!',
+		    badge: 'Increment',
+		    sound: 'default'
+		  }
+		}, {
+		  useMasterKey: true,
+		  success: function() {
+		    console.log("Notification for vote sent!");
+		  },
+		  error: function(error) {
+		    console.log(error);
+		  }
+		});
+	}
 });
