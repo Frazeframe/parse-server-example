@@ -1,4 +1,5 @@
 Parse.Cloud.afterSave('Vote', function(request) {
+	Parse.cloud.useMasterKey();
 
 	var voteWeight = request.object.get("weight");
 	var user = request.object.get("createdBy");
@@ -12,7 +13,7 @@ Parse.Cloud.afterSave('Vote', function(request) {
 		Parse.Push.send({
 		  where: pushQuery,
 		  data: {
-		    alert: 'You got a prop on your photo!',
+		    alert: 'You got an upvote on your photo!',
 		    badge: 'Increment',
 		    sound: 'default'
 		  }
