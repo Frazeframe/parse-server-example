@@ -4,6 +4,8 @@ Parse.Cloud.define('hello', function(req, res) {
 });
 
 Parse.Cloud.define('voteOnPhoto', function(request, response) {
+	 Parse.Cloud.useMasterKey()
+
 	var query = new Parse.Query("Vote");
   query.equalTo("createdBy", request.params.createdBy);
   query.equalTo("photo", request.params.photo);
@@ -40,7 +42,7 @@ Parse.Cloud.define('voteOnPhoto', function(request, response) {
     	if (voteWeight == 1 || voteWeight == -1) {
     		var PhotoClass = Parse.Object.extend("Photo");
 				var photoQuery = new Parse.Query(PhotoClass);
-				photoQuery.get("0aUwbDcimk", {
+				photoQuery.get(photoId, {
 				  success: function(photo) {
 				  	photo.increment("totalVotes", voteWeight);
 				  	photo.save();
