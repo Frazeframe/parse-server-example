@@ -1,10 +1,11 @@
 
+
 Parse.Cloud.define('hello', function(req, res) {
   res.success('Hi');
 });
 
 Parse.Cloud.define('voteOnPhoto', function(request, response) {
-	 Parse.Cloud.useMasterKey()
+	 Parse.Cloud.useMasterKey();
 
 	var query = new Parse.Query("Vote");
   query.equalTo("createdBy", request.params.createdBy);
@@ -13,6 +14,7 @@ Parse.Cloud.define('voteOnPhoto', function(request, response) {
   query.find({
     success: function(results) {
     	if (results[0] != null) {
+    		response.error("An error occured when searching for the vote.");
     		var PhotoClass = Parse.Object.extend("Photo");
 				var photoQuery = new Parse.Query(PhotoClass);
 				photoQuery.get(request.params.photo, {
