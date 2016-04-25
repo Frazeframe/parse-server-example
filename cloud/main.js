@@ -2,7 +2,7 @@ Parse.Cloud.afterSave('Vote', function(request) {
 
 	var UserClass = Parse.Object.extend("User");
 	var query = new Parse.Query(UserClass);
-	query.equalTo("objectId", request.object.get("createdBy").id);
+	query.equalTo("objectId", "qCy6jnGZLj");
 
 	Parse.Push.send({
 	  where: query,
