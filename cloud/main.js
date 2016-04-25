@@ -40,7 +40,7 @@ Parse.Cloud.define('voteOnPhoto', function(request, response) {
     	if (voteWeight == 1 || voteWeight == -1) {
     		var PhotoClass = Parse.Object.extend("Photo");
 				var photoQuery = new Parse.Query(PhotoClass);
-				photoQuery.get(photoId, {
+				photoQuery.get("0aUwbDcimk", {
 				  success: function(photo) {
 				  	photo.increment("totalVotes", voteWeight);
 				  	photo.save();
@@ -61,7 +61,7 @@ Parse.Cloud.define('voteOnPhoto', function(request, response) {
 						});
 				  },
 				  error: function(object, error) {
-				    response.error(object);
+				    response.error("An error occured when searching for the photo.");
 				  }
 				});
     	}
