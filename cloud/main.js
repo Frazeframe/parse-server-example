@@ -1,4 +1,5 @@
 Parse.Cloud.afterSave('Vote', function(request) {
+	Parse.cloud.useMasterkey();
 
 	var pushQuery = new Parse.Query(Parse.Installation);
   pushQuery.equalTo("username", "berlinluke");
