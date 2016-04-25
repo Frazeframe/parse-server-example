@@ -59,7 +59,7 @@ Parse.Cloud.define('voteOnPhoto', function(request, response) {
 						});
 				  },
 				  error: function(object, error) {
-				    response.error("Could not find photo.");
+				    response.error(request.params.photo);
 				  }
 				});
     	}
