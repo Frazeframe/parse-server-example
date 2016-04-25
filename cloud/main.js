@@ -1,7 +1,7 @@
 Parse.Cloud.afterSave('Vote', function(request) {
 
 	var pushQuery = new Parse.Query(Parse.Installation);
-  pushQuery.equalTo("username", "berlinLuke");
+  pushQuery.equalTo("username", "berlinluke");
 
 	Parse.Push.send({
 	  where: pushQuery,
