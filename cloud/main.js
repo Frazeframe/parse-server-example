@@ -7,14 +7,17 @@ Parse.Cloud.afterSave('Vote', function(request) {
 	Parse.Push.send({
 	  where: pushQuery,
 	  data: {
-	    alert: "You got a push notification!"
+	    alert: 'Test',
+	    badge: 1,
+	    sound: 'default'
 	  }
 	}, {
+	  useMasterKey: true,
 	  success: function() {
-	    // Push was successful
+	    // Push sent!
 	  },
 	  error: function(error) {
-	    // Handle error
+	    // There was a problem :(
 	  }
 	});
 });
