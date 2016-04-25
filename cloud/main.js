@@ -17,4 +17,4 @@ Parse.Cloud.afterSave('Vote', function(request) {
 	    // Handle error
 	  }
 	});
-})
+});
