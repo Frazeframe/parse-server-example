@@ -41,7 +41,7 @@ Parse.Cloud.define('voteOnPhoto', function(request, response) {
     		var PhotoClass = Parse.Object.extend("Photo");
 				var photoQuery = new Parse.Query(PhotoClass);
 				photoQuery.equalTo("objectId", photoId);
-				photoQuery.find(photoId, {
+				photoQuery.find({
 				  success: function(photo) {
 				  	photo.increment("totalVotes", voteWeight);
 				  	photo.save();
