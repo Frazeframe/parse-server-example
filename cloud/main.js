@@ -1,11 +1,10 @@
 Parse.Cloud.afterSave('Vote', function(request) {
 
-	var UserClass = Parse.Object.extend("User");
-	var query = new Parse.Query(UserClass);
-	query.equalTo("objectId", "qCy6jnGZLj");
+	var pushQuery = new Parse.Query(Parse.Installation);
+  pushQuery.equalTo("username", "berlinLuke");
 
 	Parse.Push.send({
-	  where: query,
+	  where: pushQuery,
 	  data: {
 	    alert: "You got a push notification!"
 	  }
