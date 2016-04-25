@@ -1,17 +1,18 @@
 Parse.Cloud.afterSave('Vote', function(request) {
-	Parse.cloud.useMasterKey();
 
 	var voteWeight = request.object.get("weight");
 	var user = request.object.get("createdBy");
 	var userId = user.id;
 
 	if (voteWeight == 1) {
-		var UserClass = Parse.Object.extend("User");
-		var pushQuery = new Parse.Query(UserClass);
-	  pushQuery.equalTo("objectId", userId);
+		var targetUser = new Parse.User();
+		targetUser.id = userId;
+
+		var query = new Parse.Query(Parse.Installation);
+		query.equalTo('user', targetUser);
 
 		Parse.Push.send({
-		  where: pushQuery,
+		  where: query,
 		  data: {
 		    alert: 'You got an upvote on your photo!',
 		    badge: 'Increment',
