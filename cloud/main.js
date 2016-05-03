@@ -4,18 +4,17 @@ Parse.Cloud.afterSave('Vote', function(request) {
 
 	var photoPointer = request.object.get("photo");
 
-	console.log(photoPointer.id)
-
 	var PhotoClass = Parse.Object.extend("Photo");
 	var query = new Parse.Query(PhotoClass);
 	query.get(photoPointer.id, {
 	  success: function(photo) {
 	    var user = photo.get("createdBy");
-			console.log(user)
 
 			var userId = user.id;
 
-			if (voteWeight == 1) {
+			var voteCreator = request.object.get("createdBy");
+
+			if (voteWeight == 1 && voteCreator.id != userId) {
 				var targetUser = new Parse.User();
 				targetUser.id = userId;
 
