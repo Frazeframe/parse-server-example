@@ -1,7 +1,10 @@
 Parse.Cloud.afterSave('Vote', function(request) {
 
 	var voteWeight = request.object.get("weight");
-	var user = request.object.get("createdBy");
+
+	var photo = request.object.get("photo");
+
+	var user = photo.get("createdBy");
 	var userId = user.id;
 
 	if (voteWeight == 1) {
