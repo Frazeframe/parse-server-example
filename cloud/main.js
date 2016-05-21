@@ -88,7 +88,7 @@ Parse.Cloud.afterSave('Comment', function(request) {
 				var voteCreatorQuery = new Parse.Query(UserClass);
 				voteCreatorQuery.get(voteCreatorPointer.id, {
 					success: function(voteCreator) {
-						var pushNotificationMessage = String(voteCreator.get("username")).capitalizeFirstLetter()  + " commented: "  + String(request.object.get("commentText");
+						var pushNotificationMessage = String(voteCreator.get("username")).capitalizeFirstLetter()  + " commented: "  + String(request.object.get("commentText"));
 					},
 				  error: function(object, error) {
 				  	var pushNotificationMessage = "Someone commented on your photo!";
