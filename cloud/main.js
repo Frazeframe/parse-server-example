@@ -51,17 +51,17 @@ Parse.Cloud.afterSave('Vote', function(request) {
 				var voteCreatorQuery = new Parse.Query(UserClass);
 				voteCreatorQuery.get(voteCreatorPointer.id, {
 					success: function(voteCreator) {
-						var pushNotificationMessage = String(voteCreator.get("username")).capitalizeFirstLetter()  + " upvoted your photo!"
-						sendPushNotificationMessageWithUser(pushNotificationMessage, user)
+						var pushNotificationMessage = String(voteCreator.get("username")).capitalizeFirstLetter()  + " upvoted your photo!";
+						sendPushNotificationMessageWithUser(pushNotificationMessage, user);
 					},
 				  error: function(object, error) {
-				  	sendPushNotificationMessageWithUser('You got an upvote on your photo!', user)
+				  	sendPushNotificationMessageWithUser('You got an upvote on your photo!', user);
 				  }
 				});
 			}
 	  },
 	  error: function(object, error) {
-	    console.log("Error getting photo object.")
+	    console.log("Error getting photo object.");
 	  }
 	});
 });
@@ -88,11 +88,11 @@ Parse.Cloud.afterSave('Comment', function(request) {
 				var voteCreatorQuery = new Parse.Query(UserClass);
 				voteCreatorQuery.get(voteCreatorPointer.id, {
 					success: function(voteCreator) {
-						var pushNotificationMessage = String(voteCreator.get("username")).capitalizeFirstLetter()  + " commented on your photo!"
-						sendPushNotificationMessageWithUser(pushNotificationMessage, user)
+						var pushNotificationMessage = String(voteCreator.get("username")).capitalizeFirstLetter()  + " commented: "  + String(request.object.get("commentText");
 					},
 				  error: function(object, error) {
-				  	sendPushNotificationMessageWithUser('You got an upvote on your photo!', user)
+				  	var pushNotificationMessage = "Someone commented on your photo!";
+				  	sendPushNotificationMessageWithUser(pushNotificationMessage, user);
 				  }
 				});
 			}
