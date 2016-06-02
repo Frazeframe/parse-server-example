@@ -59,6 +59,35 @@ Parse.Cloud.afterSave('Vote', function(request) {
 				  }
 				});
 			}
+
+			// Try to get existing votes.
+			var VoteClass = Parse.Object.extend("Vote");
+			var query = new Parse.Query(VoteClass);
+			query.equalTo("createdBy", voteCreatorPointer.id);
+			query.equalTo("photo", photoPointer.id);
+			query.ascending("createdAt");
+
+			query.find({
+			  success: function(results) {
+			    console.log("Successfully retrieved " + results.length + " votes.");
+
+			    // Do something with the returned Parse.Object values
+			    for (var i = 0; i < results.length; i++) {
+			      var object = results[i];
+			      console.log(object.id + ' - ' + object.get('weight'));
+			    }
+
+			    if (voteWeight == 1) {
+
+					}
+					else if (voteWeight == -1) {
+
+					}
+			  },
+			  error: function(error) {
+			    console.log("Error: " + error.code + " " + error.message);
+			  }
+			});
 	  },
 	  error: function(object, error) {
 	    console.log("Error getting photo object.");
