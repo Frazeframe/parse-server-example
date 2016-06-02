@@ -71,18 +71,13 @@ Parse.Cloud.afterSave('Vote', function(request) {
 			  success: function(results) {
 			    console.log("Successfully retrieved " + results.length + " votes.");
 
-			    // Do something with the returned Parse.Object values
-			    for (var i = 0; i < results.length; i++) {
-			      var object = results[i];
-			      console.log(object.id + ' - ' + object.get('weight'));
+			    if (results.length > 1) {
+			    	// Do something with the returned Parse.Object values
+				    for (var i = 0; i < (results.length - 1); i++) {
+				      var object = results[i];
+				      object.destroy()
+				    }
 			    }
-
-			    if (voteWeight == 1) {
-
-					}
-					else if (voteWeight == -1) {
-
-					}
 			  },
 			  error: function(error) {
 			    console.log("Error: " + error.code + " " + error.message);
