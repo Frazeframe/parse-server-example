@@ -69,13 +69,12 @@ Parse.Cloud.afterSave('Vote', function(request) {
 
 			query.find({
 			  success: function(results) {
-			    console.log("Successfully retrieved " + results.length + " votes.");
 
 			    if (results.length > 1) {
 			    	// Do something with the returned Parse.Object values
 				    for (var i = 0; i < (results.length - 1); i++) {
 				      var object = results[i];
-				      object.destroy()
+				      object.destroy();
 				    }
 			    }
 			  },
