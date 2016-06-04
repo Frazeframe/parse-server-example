@@ -45,6 +45,7 @@ Parse.Cloud.afterSave('Vote', function(request) {
 			var userId = user.id;
 			var voteCreatorPointer = request.object.get("createdBy");
 
+			// Send push notification.
 			if (voteWeight == 1 && voteCreatorPointer.id != userId) {
 				// Get user who created vote.
 				var UserClass = Parse.Object.extend("User");
@@ -60,11 +61,11 @@ Parse.Cloud.afterSave('Vote', function(request) {
 				});
 			}
 
-			// Try to get existing votes.
+			// Delete existing votes from user on same photo.
 			var VoteClass = Parse.Object.extend("Vote");
 			var query = new Parse.Query(VoteClass);
-			query.equalTo("createdBy", voteCreatorPointer.id);
-			query.equalTo("photo", photoPointer.id);
+			query.equalTo("createdBy", voteCreatorPointer);
+			query.equalTo("photo", photoPointer);
 			query.ascending("createdAt");
 
 			query.find({
@@ -73,8 +74,18 @@ Parse.Cloud.afterSave('Vote', function(request) {
 			    if (results.length > 1) {
 			    	// Do something with the returned Parse.Object values
 				    for (var i = 0; i < (results.length - 1); i++) {
-				      var object = results[i];
-				      object.destroy();
+				      var existingVote = results[i];
+
+				      if (existingVote.get("weight") == 1) {
+				      	photo.increment("totalVotes", -1);
+				      	photo.save();
+				      }
+				      else if (existingVote.get("weight") == -1) {
+				      	photo.increment("totalVotes", 1);
+				      	photo.save();
+				      }
+
+				      existingVote.destroy();
 				    }
 			    }
 			  },
