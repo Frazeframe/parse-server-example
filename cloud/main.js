@@ -32,6 +32,66 @@ String.prototype.capitalizeFirstLetter = function() {
 // Voting
 //-----------------------------------------------------------------------------
 
+Parse.Cloud.beforeSave('Vote', function(request, response) {
+	var createdByPointer = request.object.get("createdBy");
+	var photoPointer = request.object.get("photo");
+
+	if (!createdByPointer || !photoPointer) {
+    response.error('Vote must have createdBy and photo.');
+  } else {
+  	var VoteClass = Parse.Object.extend("Vote");
+    var query = new Parse.Query(VoteClass);
+
+    query.equalTo("createdBy", createdByPointer);
+    query.equalTo("photo", photoPointer);
+    query.first({
+      success: function(object) {
+        if (object && (request.object.id != object.id)) {
+          response.error("User has already voted on this photo.");
+        } else {
+
+        	// Adjust total votes from photo.
+        	var totalVotesQuery = new Parse.Query(VoteClass);
+    			totalVotesQuery.equalTo("photo", photoPointer);
+					totalVotesQuery.find({
+					  success: function(results) {
+					  	var totalVoteAmount = 0;
+					  	for (var index = 0; index < results.length; index++) {
+					  		if (request.object.id != results[index].id) {
+					  			totalVoteAmount += results[index].get("weight");
+					  		}
+					  	}
+					  	totalVoteAmount += request.object.get("weight");
+
+					  	var PhotoClass = Parse.Object.extend("Photo");
+					  	var photoQuery = new Parse.Query(PhotoClass);
+							photoQuery.get(photoPointer.id, {
+								success: function(object) {
+									console.log(totalVoteAmount);
+									object.set('totalVotes', totalVoteAmount);
+									object.save();
+									response.success();
+								},
+								error: function(error) {
+									console.log("Could not find votes.");
+									response.success();
+					      }
+							});
+					  },
+					  error: function(error) {
+					  	console.log("Could not find photo.");
+					  	response.success();
+					  }
+					});
+        }
+      },
+      error: function(error) {
+        response.error("Could not validate uniqueness for this vote object.");
+      }
+    });
+  }
+});
+
 Parse.Cloud.afterSave('Vote', function(request) {
 	var voteWeight = request.object.get("weight");
 	var photoPointer = request.object.get("photo");
@@ -60,39 +120,6 @@ Parse.Cloud.afterSave('Vote', function(request) {
 				  }
 				});
 			}
-
-			// Delete existing votes from user on same photo.
-			var VoteClass = Parse.Object.extend("Vote");
-			var query = new Parse.Query(VoteClass);
-			query.equalTo("createdBy", voteCreatorPointer);
-			query.equalTo("photo", photoPointer);
-			query.ascending("createdAt");
-
-			query.find({
-			  success: function(results) {
-
-			    if (results.length > 1) {
-			    	// Do something with the returned Parse.Object values
-				    for (var i = 0; i < (results.length - 1); i++) {
-				      var existingVote = results[i];
-
-				      if (existingVote.get("weight") == 1) {
-				      	photo.increment("totalVotes", -1);
-				      	photo.save();
-				      }
-				      else if (existingVote.get("weight") == -1) {
-				      	photo.increment("totalVotes", 1);
-				      	photo.save();
-				      }
-
-				      existingVote.destroy();
-				    }
-			    }
-			  },
-			  error: function(error) {
-			    console.log("Error: " + error.code + " " + error.message);
-			  }
-			});
 	  },
 	  error: function(object, error) {
 	    console.log("Error getting photo object.");
