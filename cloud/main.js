@@ -2,7 +2,7 @@
 // Helper methods
 //-----------------------------------------------------------------------------
 
-function sendPushNotificationMessageWithUser(message, user) {
+function sendPushNotificationMessageWithUser(message, user, data_to_view_key, data_to_view_id_value) {
   var query = new Parse.Query(Parse.Installation);
 	query.equalTo('user', user);
 
@@ -11,7 +11,8 @@ function sendPushNotificationMessageWithUser(message, user) {
 	  data: {
 	    alert: message,
 	    badge: 'Increment',
-	    sound: 'default'
+	    sound: 'default',
+	    data_to_view_key: data_to_view_id_value
 	  }
 	}, {
 	  useMasterKey: true,
@@ -113,10 +114,10 @@ Parse.Cloud.afterSave('Vote', function(request) {
 				voteCreatorQuery.get(voteCreatorPointer.id, {
 					success: function(voteCreator) {
 						var pushNotificationMessage = String(voteCreator.get("username")).capitalizeFirstLetter()  + " upvoted your photo!";
-						sendPushNotificationMessageWithUser(pushNotificationMessage, user);
+						sendPushNotificationMessageWithUser(pushNotificationMessage, user, "photo", photoPointer.id);
 					},
 				  error: function(object, error) {
-				  	sendPushNotificationMessageWithUser('You got an upvote on your photo!', user);
+				  	sendPushNotificationMessageWithUser('You got an upvote on your photo!', user, "photo", data_to_view_id_value, photoPointer.id);
 				  }
 				});
 			}
@@ -150,11 +151,11 @@ Parse.Cloud.afterSave('Comment', function(request) {
 				voteCreatorQuery.get(voteCreatorPointer.id, {
 					success: function(voteCreator) {
 						var pushNotificationMessage = String(voteCreator.get("username")).capitalizeFirstLetter()  + " commented: "  + String(request.object.get("commentText"));
-						sendPushNotificationMessageWithUser(pushNotificationMessage, user);
+						sendPushNotificationMessageWithUser(pushNotificationMessage, user, "photo", photoPointer.id);
 					},
 				  error: function(object, error) {
 				  	var pushNotificationMessage = "Someone commented on your photo!";
-				  	sendPushNotificationMessageWithUser(pushNotificationMessage, user);
+				  	sendPushNotificationMessageWithUser(pushNotificationMessage, user, "photo", photoPointer.id);
 				  }
 				});
 			}
