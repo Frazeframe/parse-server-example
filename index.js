@@ -12,13 +12,30 @@ if (!databaseUri) {
 }
 
 var api = new ParseServer({
-  databaseURI: databaseUri || 'mongodb://localhost:27017/dev',
+  databaseURI: databaseUri || 'mongodb://frazeframetester:Frazeframe123@ds017018-a0.mlab.com:17018/fraze-frame',
   cloud: process.env.CLOUD_CODE_MAIN || __dirname + '/cloud/main.js',
-  appId: process.env.APP_ID || 'myAppId',
-  masterKey: process.env.MASTER_KEY || '', //Add your master key here. Keep it secret!
+  appId: process.env.APP_ID || 'JywFR4CxgCLRsb32sksRVA8aLuIuoAlRMqnoqlJV',
+  masterKey: process.env.MASTER_KEY || 'rNSMQDmGw5eBMFBuP0OOb0KbEWBcv3CJ23YdfU8i', //Add your master key here. Keep it secret!
   serverURL: process.env.SERVER_URL || 'http://localhost:1337/parse',  // Don't forget to change to https if needed
-  liveQuery: {
-    classNames: ["Posts", "Comments"] // List of classes to support for query subscriptions
+  fileKey: 'efac82cf-dd00-43bf-9262-f14d7a7cafdb',
+
+  push: {
+    android: {
+      senderId: '...',
+      apiKey: '...'
+    },
+    ios: [
+      {
+        pfx: process.env.DEV_PUSH_CERTIFICATE_PATH || 'FFDevPushCert.p12',
+        bundleId: 'appsByLukas.com.Fraze-Frame',
+        production: false
+      },
+      {
+        pfx: process.env.DEV_PUSH_CERTIFICATE_PATH || 'FFProdPushCert.p12',
+        bundleId: 'appsByLukas.com.Fraze-Frame',
+        production: true
+      }
+    ]
   }
 });
 // Client-keys like the javascript key or the .NET key are not necessary with parse-server
