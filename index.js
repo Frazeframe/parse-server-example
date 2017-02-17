@@ -17,11 +17,11 @@ var api = new ParseServer({
   cloud: process.env.CLOUD_CODE_MAIN || __dirname + '/cloud/main.js',
   appId: process.env.APP_ID || 'JywFR4CxgCLRsb32sksRVA8aLuIuoAlRMqnoqlJV',
   masterKey: process.env.MASTER_KEY || 'rNSMQDmGw5eBMFBuP0OOb0KbEWBcv3CJ23YdfU8i',
-  serverURL: process.env.SERVER_URL || 'https://fraze-frame-temp.herokuapp.com/parse',
+  serverURL: process.env.SERVER_URL || 'https://fraze-frame.herokuapp.com/parse',
   fileKey: process.env.FILE_KEY || 'efac82cf-dd00-43bf-9262-f14d7a7cafdb',
   appName: process.env.APP_NAME || 'Frazeframe',
   verifyUserEmails: process.env.VERIFY_USER_EMAIL || true,
-  publicServerURL: process.env.SERVER_URL || 'https://fraze-frame-temp.herokuapp.com/parse',
+  publicServerURL: process.env.SERVER_URL || 'https://fraze-frame.herokuapp.com/parse',
   emailAdapter: new SimpleMailgunAdapter({
     fromAddress: process.env.EMAIL_FROM || 'Frazeframe (no-reply) <noreply@frazeframe.com>',
     domain: process.env.EMAIL_DOMAIN || 'frazeframe.com',
