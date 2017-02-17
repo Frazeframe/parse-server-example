@@ -16,21 +16,16 @@ var api = new ParseServer({
   databaseURI: databaseUri || 'mongodb://frazeframetester:Frazeframe123@ds017018-a0.mlab.com:17018/fraze-frame',
   cloud: process.env.CLOUD_CODE_MAIN || __dirname + '/cloud/main.js',
   appId: process.env.APP_ID || 'JywFR4CxgCLRsb32sksRVA8aLuIuoAlRMqnoqlJV',
-  masterKey: process.env.MASTER_KEY || 'rNSMQDmGw5eBMFBuP0OOb0KbEWBcv3CJ23YdfU8i', //Add your master key here. Keep it secret!
-  serverURL: process.env.SERVER_URL || 'https://fraze-frame-temp.herokuapp.com/parse',  // Don't forget to change to https if needed
+  masterKey: process.env.MASTER_KEY || 'rNSMQDmGw5eBMFBuP0OOb0KbEWBcv3CJ23YdfU8i',
+  serverURL: process.env.SERVER_URL || 'https://fraze-frame-temp.herokuapp.com/parse',
   fileKey: process.env.FILE_KEY || 'efac82cf-dd00-43bf-9262-f14d7a7cafdb',
   appName: process.env.APP_NAME || 'Frazeframe',
   verifyUserEmails: process.env.VERIFY_USER_EMAIL || true,
-  emailVerifyTokenValidityDuration: process.env.EMAIL_VERIFY_TOKEN_VALIDITY_DURATION || 2 * 60 * 60,
   publicServerURL: process.env.SERVER_URL || 'https://fraze-frame-temp.herokuapp.com/parse',
-  // The email adapter
   emailAdapter: new SimpleMailgunAdapter({
-    // The address that your emails come from
     fromAddress: process.env.EMAIL_FROM || 'Frazeframe (no-reply) <noreply@frazeframe.com>',
-    // Your domain from mailgun.com
-    domain: process.env.EMAIL_DOMAIN || 'sandboxa4c2916fcaa94480849108a3b097714e.mailgun.org',
-    // Your API key from mailgun.com
-    apiKey: process.env.EMAIL_API_KEY || 'key-c00980585eb19a9bce7fa998f031543e'
+    domain: process.env.EMAIL_DOMAIN || 'frazeframe.com',
+    apiKey: process.env.EMAIL_API_KEY || 'key-cb88e838cef96556e73652bfeb376886'
   }),
 
   push: {
